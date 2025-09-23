@@ -144,11 +144,26 @@ public class Project1 {
 	//remove process
 	public static void removeProcess(){
 		System.out.println("remove process"); //DEBUG, REMOVE LATER
+
+		//Ask user for process to remove
+		//check valid input 
+
+		//check if table[index].getParentIndex() == -1
+
+		//Call removeProcessRecursively to remove process
+
+		//print confirmation message
 	} // end of remove process
 	
 	//remove process recursively
 	public static void removeProcessRecursively (int currentIndex) {
 		System.out.println("SAMPLE TEXT"); //DEBUG, REMOVE LATER
+		//case if currentIndex == -1
+
+		//Remove all children
+		//While loop != -1, call function
+	
 	}// end of remove process recursively
 
 }//end of class
+
