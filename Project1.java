@@ -1,5 +1,6 @@
 //Richard Phan
 //Comp 322 Fall 2025
+//9/25/25
 //Project 1
 
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class Project1 {
 		int option = 0; //Any value other than 4 (4 ends the program
 		while (option !=4) {
 			System.out.println();
-			System.out.println("1) Print Hiearchy from table");
+			System.out.println("1) Print hiearchy from table");
 			System.out.println("2) Add child process to hierarchy");
 			System.out.println("3) Remove a process's descendants from the hierarchy");
 			System.out.println("4) Quit program");
@@ -87,9 +88,7 @@ public class Project1 {
 	}//end of print hierarchy
 	
 	//Add process
-	public static void addProcess() {
-		System.out.println("add process"); //DEBUG, REMOVE LATER
-		
+	public static void addProcess() {	
 		//enter the parent process index
 		System.out.println("Enter the parent process index for the child process:");
 		if (!input.hasNextInt()) { //data type check
@@ -143,27 +142,50 @@ public class Project1 {
 	
 	//remove process
 	public static void removeProcess(){
-		System.out.println("remove process"); //DEBUG, REMOVE LATER
+		//enter the parent process index
+		System.out.println("Enter the parent process index whose descendants will be removed:");
+		if (!input.hasNextInt()) { //data type check
+			System.out.println ("Invalid input");
+			input.nextLine(); //input flush
+			return;
+		}
+		int parentIndex = input.nextInt();
+		input.nextLine(); //input flush
+		if(parentIndex < 0 || parentIndex >= table.length) { //valid data check
+			System.out.println("Invalid process index");
+			return;
+		}
+		//is the parent of the parent valid?
+		if (table[parentIndex].getParentIndex() == -1) {
+			System.out.println ("Process index is not active");
+			return;
+		}
 
-		//Ask user for process to remove
-		//check valid input 
-
-		//check if table[index].getParentIndex() == -1
-
-		//Call removeProcessRecursively to remove process
-
-		//print confirmation message
+		//Recursively remote processes, starting with parent process' first child
+		removeProcessRecursively(table[parentIndex].getFirstChildIndex());
+		//Remove the reference to the parent process' first child
+		table[parentIndex].setFirstChildIndex(-1);
+		//print out confirmation message that descendents were removed 
+		System.out.println("All descendents of process " + parentIndex + " were removed."); 
 	} // end of remove process
 	
 	//remove process recursively
 	public static void removeProcessRecursively (int currentIndex) {
-		System.out.println("SAMPLE TEXT"); //DEBUG, REMOVE LATER
-		//case if currentIndex == -1
-
-		//Remove all children
-		//While loop != -1, call function
-	
+		if (currentIndex == -1) {
+			//Base case - exit out when an invalid index is reached
+			return;
+		}
+		//Recursively remove from the current process' younger sibling 
+		removeProcessRecursively(table[currentIndex].getYoungerSiblingIndex());
+		//Recursively remove from the current process' first child
+		removeProcessRecursively(table[currentIndex].getFirstChildIndex());
+		//remove all data from current process
+		table[currentIndex].setParentIndex(-1);
+		table[currentIndex].setFirstChildIndex(-1);
+		table[currentIndex].setYoungerSiblingIndex(-1);
+		
 	}// end of remove process recursively
 
 }//end of class
+
 
