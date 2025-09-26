@@ -15,3 +15,10 @@ The program adds or removes child processes, between a static array and a hierar
 3) Remove a process's descendants from the hierarchy
 
 4) Quit the program
+
+
+
+Sample output:
+Index   Parent   First   Younger  
+0       0        1  
+1       0  
