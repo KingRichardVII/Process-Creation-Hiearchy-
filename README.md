@@ -16,3 +16,6 @@ The program adds or removes child processes, between a static array and a hierar
 
 4) Quit the program
 
+
+FIXME: Tweak REAMDE format
+FIXME: Add sample output
